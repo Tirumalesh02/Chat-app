@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships Discussion Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // If opened via Live Server or file:// without backend auth, redirect to /login
+        (function(){
+            var host = location.host;
+            var isBackend = host.includes(':3000');
+            // If not served by backend (no auth), open the static login page
+            if (!isBackend) {
+                var path = location.pathname.toLowerCase();
+                var atLogin = path.endsWith('/login') || path.endsWith('/login.html');
+                if (!atLogin) {
+                    // Build a relative URL to login.html so it works under /Frontend/* too
+                    var loginUrl = new URL('login.html', location.href);
+                    location.replace(loginUrl.toString());
+                }
+            }
+        })();
+    </script>
+    <div class="chat-container">
+        <header class="chat-header">
+            <div class="left-section">
+                <span class="back-arrow">&leftarrow;</span>
+                <img src="assets/group_icon.svg" alt="Group Icon" class="group-icon">
+                <div class="group-info">
+                    <div class="group-name">Internships Talk</div>
+                </div>
+            </div>
+            <div class="right-section">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+
+                    <img id="themeIcon" src="assets/icon_moon_light.svg" alt="Toggle theme" />
+                </button>
+            </div>
+        </header>
+
+        <main class="chat-messages">
+            <div class="message system-message">Welcome! Share internship updates, tips, and openings here.</div>
+
+            <div class="message incoming anonymous">
+                <span class="profile-placeholder"></span>
+                <div class="message-content">
+                    <div class="text">Anyone heard back from summer 2026 SWE internships?</div>
+                    <div class="timestamp">11:38 AM</div>
+                </div>
+            </div>
+            <div class="message incoming anonymous">
+                <span class="profile-placeholder"></span>
+                <div class="message-content">
+                    <div class="text">Referral available for product design intern at my company. DM!</div>
+                    <div class="timestamp">11:56 AM</div>
+                </div>
+            </div>
+
+            <div class="message outgoing">
+                <div class="message-content">
+                    <div class="text">Quick tip: tailor your resume bullets to the job description keywords.</div>
+                    <div class="timestamp">12:31 PM <span class="read-receipt">✓✓</span></div>
+                </div>
+            </div>
+
+            <div class="message incoming anonymous">
+                <span class="profile-placeholder"></span>
+                <div class="message-content">
+                    <div class="text">Which sites do you track for internship listings?</div>
+                    <div class="timestamp">12:35 PM</div>
+                </div>
+            </div>
+            <div class="message incoming anonymous">
+                <span class="profile-placeholder"></span>
+                <div class="message-content">
+                    <div class="text">Internship season is intense but we got this!</div>
+                    <div class="timestamp">12:42 PM</div>
+                </div>
+            </div>
+
+            <div class="message outgoing red-bubble">
+                <div class="message-content">
+                    <div class="text">Not attending career fair today—focusing on applications.</div>
+                    <div class="timestamp">1:36 PM <span class="read-receipt">✓✓</span></div>
+                </div>
+            </div>
+
+            <div class="message incoming named-user">
+                <img src="assets/avatar_default.svg" alt="User Avatar" class="profile-picture">
+                <div class="message-content">
+                    <div class="sender-name">Abhay Shukla</div>
+                    <div class="text">Check out the new internship prep resource doc pinned in the group.</div>
+                    <div class="timestamp">11:35 AM</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="chat-footer">
+            <div class="anonymous-toggle">
+                <span class="icon">&#x1f697;</span>
+                You're chatting about <strong>Internships</strong> — toggle to appear as Anonymous or your name.
+                <span class="icon">&#x1f697;</span>
+            </div>
+            <div class="input-area">
+                <input type="text" placeholder="Share internship tips, links, or questions...">
+                <span class="icon camera-icon">📷</span>
+                <span class="icon clip-icon">📎</span>
+                <button class="send-button">&#x27a4;</button>
+            </div>
+        </footer>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
